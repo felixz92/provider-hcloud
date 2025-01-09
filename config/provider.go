@@ -7,10 +7,10 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+	"github.com/felixz92/provider-hcloud/config/network"
+	"github.com/felixz92/provider-hcloud/config/server"
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
-
-	"github.com/felixz92/provider-hcloud/config/null"
 )
 
 const (
@@ -36,7 +36,8 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		server.Configure,
+		network.Configure,
 	} {
 		configure(pc)
 	}
