@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: resources.null.hcloud.upbound.io
+  name: networks.server.fzx.github.com
 spec:
-  group: null.hcloud.upbound.io
+  group: server.fzx.github.com
   names:
     categories:
     - crossplane
     - managed
     - hcloud
-    kind: Resource
-    listKind: ResourceList
-    plural: resources
-    singular: resource
+    kind: Network
+    listKind: NetworkList
+    plural: networks
+    singular: network
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,10 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Resource is the Schema for the Resources API. The null_resource
-          resource implements the standard resource lifecycle but takes no further
-          action.hashicorp. The triggers argument allows specifying an arbitrary set
-          of values that, when changed, will cause the resource to be replaced.
+        description: Network is the Schema for the Networks API. Provides a Hetzner
+          Cloud Network to represent a Network in the Hetzner Cloud.
         properties:
           apiVersion:
             description: |-
@@ -57,7 +55,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ResourceSpec defines the desired state of Resource
+            description: NetworkSpec defines the desired state of Network
             properties:
               deletionPolicy:
                 default: Delete
@@ -75,12 +73,25 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  triggers:
+                  deleteProtection:
+                    description: Enable or disable delete protection. See "Delete
+                      Protection" in the Provider Docs for details.
+                    type: boolean
+                  exposeRoutesToVswitch:
+                    description: |-
+                      Enable or disable exposing the routes to the vSwitch connection. The exposing only takes effect if a vSwitch connection is active.
+                      Enable or disable exposing the routes to the vSwitch connection. The exposing only takes effect if a vSwitch connection is active.
+                    type: boolean
+                  ipRange:
+                    description: IP Range of the whole Network which must span all
+                      included subnets and route destinations. Must be one of the
+                      private ipv4 ranges of RFC1918.
+                    type: string
+                  labels:
                     additionalProperties:
                       type: string
-                    description: |-
-                      running any associated provisioners.
-                      A map of arbitrary strings that, when changed, will force the null resource to be replaced, re-running any associated provisioners.
+                    description: User-defined labels (key-value pairs) should be created
+                      with.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -97,12 +108,25 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  triggers:
+                  deleteProtection:
+                    description: Enable or disable delete protection. See "Delete
+                      Protection" in the Provider Docs for details.
+                    type: boolean
+                  exposeRoutesToVswitch:
+                    description: |-
+                      Enable or disable exposing the routes to the vSwitch connection. The exposing only takes effect if a vSwitch connection is active.
+                      Enable or disable exposing the routes to the vSwitch connection. The exposing only takes effect if a vSwitch connection is active.
+                    type: boolean
+                  ipRange:
+                    description: IP Range of the whole Network which must span all
+                      included subnets and route destinations. Must be one of the
+                      private ipv4 ranges of RFC1918.
+                    type: string
+                  labels:
                     additionalProperties:
                       type: string
-                    description: |-
-                      running any associated provisioners.
-                      A map of arbitrary strings that, when changed, will force the null resource to be replaced, re-running any associated provisioners.
+                    description: User-defined labels (key-value pairs) should be created
+                      with.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -273,21 +297,38 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.ipRange is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ipRange)
+                || (has(self.initProvider) && has(self.initProvider.ipRange))'
           status:
-            description: ResourceStatus defines the observed state of Resource.
+            description: NetworkStatus defines the observed state of Network.
             properties:
               atProvider:
                 properties:
+                  deleteProtection:
+                    description: Enable or disable delete protection. See "Delete
+                      Protection" in the Provider Docs for details.
+                    type: boolean
+                  exposeRoutesToVswitch:
+                    description: |-
+                      Enable or disable exposing the routes to the vSwitch connection. The exposing only takes effect if a vSwitch connection is active.
+                      Enable or disable exposing the routes to the vSwitch connection. The exposing only takes effect if a vSwitch connection is active.
+                    type: boolean
                   id:
-                    description: (String) This is set to a random value at create
-                      time.
+                    description: (int) Unique ID of the network.
                     type: string
-                  triggers:
+                  ipRange:
+                    description: IP Range of the whole Network which must span all
+                      included subnets and route destinations. Must be one of the
+                      private ipv4 ranges of RFC1918.
+                    type: string
+                  labels:
                     additionalProperties:
                       type: string
-                    description: |-
-                      running any associated provisioners.
-                      A map of arbitrary strings that, when changed, will force the null resource to be replaced, re-running any associated provisioners.
+                    description: User-defined labels (key-value pairs) should be created
+                      with.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

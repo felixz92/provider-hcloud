@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: storeconfigs.hcloud.upbound.io
+  name: storeconfigs.hcloud.fzx.github.com
 spec:
-  group: hcloud.upbound.io
+  group: hcloud.fzx.github.com
   names:
     categories:
     - crossplane
@@ -31,8 +31,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: A StoreConfig configures how hcloud controller should store
-          connection details.
+        description: A StoreConfig configures how hcloud controller should store connection
+          details.
         properties:
           apiVersion:
             description: |-
