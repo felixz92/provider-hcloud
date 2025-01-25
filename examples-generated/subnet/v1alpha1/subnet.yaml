@@ -14,3 +14,17 @@ spec:
         testing.upbound.io/example-name: mynet
     networkZone: eu-central
     type: cloud
+
+---
+
+apiVersion: hcloud.fzx.github.com/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: subnet/v1alpha1/subnet
+  labels:
+    testing.upbound.io/example-name: mynet
+  name: mynet
+spec:
+  forProvider:
+    ipRange: 10.0.0.0/8
