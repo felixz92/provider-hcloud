@@ -1,0 +1,11 @@
+apiVersion: hcloud.fzx.github.com/v1alpha1
+kind: Server
+metadata:
+  name: node1
+spec:
+  forProvider:
+    image: debian-11
+    publicNet:
+    - ipv4Enabled: true
+      ipv6Enabled: true
+    serverType: cx22

@@ -9,8 +9,9 @@ import "github.com/crossplane/upjet/pkg/config"
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
-	"hcloud_network": config.NameAsIdentifier,
-	"hcloud_server":  config.NameAsIdentifier,
+	"hcloud_network":        config.NameAsIdentifier,
+	"hcloud_server":         config.NameAsIdentifier,
+	"hcloud_network_subnet": config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

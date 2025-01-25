@@ -21,7 +21,7 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/felixz92/provider-hcloud/apis/server/v1alpha1"
+	v1alpha1 "github.com/felixz92/provider-hcloud/apis/hcloud/v1alpha1"
 	features "github.com/felixz92/provider-hcloud/internal/features"
 )
 

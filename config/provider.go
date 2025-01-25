@@ -9,6 +9,7 @@ import (
 	_ "embed"
 	"github.com/felixz92/provider-hcloud/config/network"
 	"github.com/felixz92/provider-hcloud/config/server"
+	"github.com/felixz92/provider-hcloud/config/subnet"
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 )
@@ -38,6 +39,7 @@ func GetProvider() *ujconfig.Provider {
 		// add custom config functions
 		server.Configure,
 		network.Configure,
+		subnet.Configure,
 	} {
 		configure(pc)
 	}

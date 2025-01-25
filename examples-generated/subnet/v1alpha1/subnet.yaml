@@ -1,0 +1,16 @@
+apiVersion: subnet.fzx.github.com/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: subnet/v1alpha1/subnet
+  labels:
+    testing.upbound.io/example-name: foonet
+  name: foonet
+spec:
+  forProvider:
+    ipRange: 10.0.1.0/24
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mynet
+    networkZone: eu-central
+    type: cloud

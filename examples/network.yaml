@@ -1,0 +1,9 @@
+apiVersion: hcloud.fzx.github.com/v1alpha1
+kind: Network
+metadata:
+  name: privnet
+  labels:
+    testing.upbound.io/example-name: mynet
+spec:
+  forProvider:
+    ipRange: 10.0.1.0/24

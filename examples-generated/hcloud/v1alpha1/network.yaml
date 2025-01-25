@@ -1,8 +1,8 @@
-apiVersion: server.fzx.github.com/v1alpha1
+apiVersion: hcloud.fzx.github.com/v1alpha1
 kind: Network
 metadata:
   annotations:
-    meta.upbound.io/example-id: server/v1alpha1/network
+    meta.upbound.io/example-id: hcloud/v1alpha1/network
   labels:
     testing.upbound.io/example-name: privNet
   name: privnet
