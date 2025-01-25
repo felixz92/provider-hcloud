@@ -7,6 +7,7 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+
 	"github.com/felixz92/provider-hcloud/config/network"
 	"github.com/felixz92/provider-hcloud/config/server"
 	"github.com/felixz92/provider-hcloud/config/subnet"

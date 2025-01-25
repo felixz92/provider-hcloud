@@ -8,10 +8,12 @@ package v1alpha1
 
 import (
 	"context"
+
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	v1alpha1 "github.com/felixz92/provider-hcloud/apis/hcloud/v1alpha1"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	v1alpha1 "github.com/felixz92/provider-hcloud/apis/hcloud/v1alpha1"
 )
 
 // ResolveReferences of this Subnet.
